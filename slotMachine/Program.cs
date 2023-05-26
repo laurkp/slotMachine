@@ -109,10 +109,8 @@
                     }
                     // Prompting how much money the user has left
                     Console.WriteLine($"Bank: {money}$");
-
                 }
             }
-
         }
     }
 }
