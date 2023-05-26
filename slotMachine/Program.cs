@@ -49,7 +49,7 @@
                 Random random = new Random();
 
                 // Declaring an array of numbers and a 2D array
-                int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+                int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
                 int[,] slotMachine = new int[3, 3];
 
                 // Asking the user to start the game
