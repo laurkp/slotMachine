@@ -1,7 +1,10 @@
-﻿namespace slotMachine
+﻿using System.Collections.Generic;
+
+namespace slotMachine
 {
     internal class Program
     {
+        /*
         public const double STAKE1 = 10;
         public const double STAKE2 = 25;
         public const double STAKE3 = 50;
@@ -11,8 +14,13 @@
         public const double LOSE1 = 0.10;
         public const double LOSE2 = 0.25;
         public const double LOSE3 = 0.5;
+        */
         static void Main(string[] args)
         {
+            List<int> stakeList = new List<int> { 10, 25, 50 };
+            List<double> winList = new List<double> { 1, 2.5, 5 };
+            List<double> loseList = new List<double> { 0.10, 0.25, 0.5 };
+
             while (true)
             {
                 // Prompting welcome message
@@ -25,22 +33,9 @@
 
 
                 //Asking the user to select a stake
-                Console.WriteLine($"\nSelect stake:\n a - {STAKE1}cents\n b - {STAKE2}cents\n c - {STAKE3}cents\n ");
-                string stake = Console.ReadLine();
-                double userStake = 0;
-
-                if (stake == "a")
-                {
-                    userStake = STAKE1;
-                }
-                if (stake == "b")
-                {
-                    userStake = STAKE2;
-                }
-                if (stake == "c")
-                {
-                    userStake = STAKE3;
-                }
+                Console.WriteLine($"\nSelect stake:\n 0 - {stakeList[0]}cents\n 1 - {stakeList[1]}cents\n 2 - {stakeList[2]}cents\n ");
+                int stakeIdx = Convert.ToInt32(Console.ReadLine());
+                int userStake = stakeList[stakeIdx];
 
                 // Prompting the playing stake
                 Console.WriteLine($"* Playing stake: {userStake}cents *");
@@ -79,32 +74,32 @@
                         (slotMachine[2, 0] == slotMachine[2, 1] && slotMachine[2, 1] == slotMachine[2, 2]) ||
                         (slotMachine[0, 0] == slotMachine[1, 1] && slotMachine[2, 2] == slotMachine[0, 0]))
                     {
-                        if (userStake == STAKE1)
+                        if (userStake == stakeList[0])
                         {
-                            money = money + WIN1;
+                            money = money + winList[0];
                         }
-                        if (userStake == STAKE2)
+                        if (userStake == stakeList[1])
                         {
-                            money = money + WIN2;
+                            money = money + winList[1];
                         }
-                        if (userStake == STAKE3)
+                        if (userStake == stakeList[2])
                         {
-                            money = money + WIN3;
+                            money = money + winList[2];
                         }
                     }
                     else
                     {
-                        if (userStake == STAKE1)
+                        if (userStake == stakeList[0])
                         {
-                            money = money - LOSE1;
+                            money = money - loseList[0];
                         }
-                        if (userStake == STAKE2)
+                        if (userStake == stakeList[1])
                         {
-                            money = money - LOSE2;
+                            money = money - loseList[1];
                         }
-                        if (userStake == STAKE3)
+                        if (userStake == stakeList[2])
                         {
-                            money = money - LOSE3;
+                            money = money - loseList[2];
                         }
                     }
                     // Prompting how much money the user has left
