@@ -4,19 +4,9 @@ namespace slotMachine
 {
     internal class Program
     {
-        /*
-        public const double STAKE1 = 10;
-        public const double STAKE2 = 25;
-        public const double STAKE3 = 50;
-        public const double WIN1 = 1;
-        public const double WIN2 = 2.5;
-        public const double WIN3 = 5;
-        public const double LOSE1 = 0.10;
-        public const double LOSE2 = 0.25;
-        public const double LOSE3 = 0.5;
-        */
         static void Main(string[] args)
         {
+            // Declaring lists for stake, wins and loses
             List<int> stakeList = new List<int> { 10, 25, 50 };
             List<double> winList = new List<double> { 1, 2.5, 5 };
             List<double> loseList = new List<double> { 0.10, 0.25, 0.5 };
