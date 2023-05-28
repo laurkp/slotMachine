@@ -43,6 +43,7 @@ namespace slotMachine
                 {
 
                     // Assigning a random number to each slot
+<<<<<<< HEAD:slotMachine/Program.cs
                     for (int r = 0; r < 3; r++) 
                     {
                         for (int c = 0; c < 3; c++) 
@@ -50,6 +51,17 @@ namespace slotMachine
                             slotMachine[r, c] = random.Next(1, 10);
                         }
                     }
+=======
+                    slotMachine[0, 0] = random.Next(0, 10);
+                    slotMachine[0, 1] = random.Next(0, 10);
+                    slotMachine[0, 2] = random.Next(0, 10);
+                    slotMachine[1, 0] = random.Next(0, 10);
+                    slotMachine[1, 1] = random.Next(0, 10);
+                    slotMachine[1, 2] = random.Next(0, 10);
+                    slotMachine[2, 0] = random.Next(0, 10);
+                    slotMachine[2, 1] = random.Next(0, 10);
+                    slotMachine[2, 2] = random.Next(0, 10);
+>>>>>>> 16e60cc64ccedb287886f27b8b9231b58a53ea9f:slotMachine/#1 Removing the comment from the beginning of the code
 
                     // Prompting the slots with the random numbers
                     Console.WriteLine($"\n{slotMachine[0, 0]} | {slotMachine[0, 1]} | {slotMachine[0, 2]}\n-- --  --\n{slotMachine[1, 0]} | {slotMachine[1, 1]} | {slotMachine[1, 2]}\n-- --  --\n{slotMachine[2, 0]} | {slotMachine[2, 1]} | {slotMachine[2, 2]}\n");
