@@ -33,27 +33,23 @@ namespace slotMachine
                 // Declaring a random variable
                 Random random = new Random();
 
-                // Declaring an array of numbers and a 2D array
-                int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+                // Declaring a 2D array
                 int[,] slotMachine = new int[3, 3];
 
                 // Asking the user to start the game
                 Console.WriteLine("\n** Press 'Enter' to play **");
 
-
                 while (Console.ReadKey().Key == ConsoleKey.Enter && money >= 0.10)
                 {
 
                     // Assigning a random number to each slot
-                    slotMachine[0, 0] = random.Next(numbers.Length);
-                    slotMachine[0, 1] = random.Next(numbers.Length);
-                    slotMachine[0, 2] = random.Next(numbers.Length);
-                    slotMachine[1, 0] = random.Next(numbers.Length);
-                    slotMachine[1, 1] = random.Next(numbers.Length);
-                    slotMachine[1, 2] = random.Next(numbers.Length);
-                    slotMachine[2, 0] = random.Next(numbers.Length);
-                    slotMachine[2, 1] = random.Next(numbers.Length);
-                    slotMachine[2, 2] = random.Next(numbers.Length);
+                    for (int r = 0; r < 3; r++) 
+                    {
+                        for (int c = 0; c < 3; c++) 
+                        {
+                            slotMachine[r, c] = random.Next(1, 10);
+                        }
+                    }
 
                     // Prompting the slots with the random numbers
                     Console.WriteLine($"\n{slotMachine[0, 0]} | {slotMachine[0, 1]} | {slotMachine[0, 2]}\n-- --  --\n{slotMachine[1, 0]} | {slotMachine[1, 1]} | {slotMachine[1, 2]}\n-- --  --\n{slotMachine[2, 0]} | {slotMachine[2, 1]} | {slotMachine[2, 2]}\n");
