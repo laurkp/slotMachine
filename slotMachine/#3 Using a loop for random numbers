@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace slotMachine
 {
@@ -16,81 +16,128 @@ namespace slotMachine
                 // Prompting welcome message
                 Console.WriteLine("*** WELCOME TO THE SLOT MACHINE ***");
 
-                //Asking the user to place a bet
-                Console.WriteLine("\nPlace a bet: ");
-                double bet = Convert.ToDouble(Console.ReadLine());
-                double money = bet;
-
-
-                //Asking the user to select a stake
-                Console.WriteLine($"\nSelect stake:\n 0 - {stakeList[0]}cents\n 1 - {stakeList[1]}cents\n 2 - {stakeList[2]}cents\n ");
-                int stakeIdx = Convert.ToInt32(Console.ReadLine());
-                int userStake = stakeList[stakeIdx];
-
-                // Prompting the playing stake
-                Console.WriteLine($"* Playing stake: {userStake}cents *");
-
-                // Declaring a random variable
-                Random random = new Random();
-
-                // Declaring a 2D array
-                int[,] slotMachine = new int[3, 3];
-
-                // Asking the user to start the game
-                Console.WriteLine("\n** Press 'Enter' to play **");
-
-                while (Console.ReadKey().Key == ConsoleKey.Enter && money >= 0.10)
+                Console.WriteLine("Insert the amount of money you want to play: ");
+                double bank;
+                if (!Double.TryParse(Console.ReadLine(), out bank) || bank <= 0)
                 {
-
-                    // Assigning a random number to each slot
-                    for (int r = 0; r < 3; r++) 
-                    {
-                        for (int c = 0; c < 3; c++) 
-                        {
-                            slotMachine[r, c] = random.Next(1, 10);
-                        }
-                    }
-
-                    // Prompting the slots with the random numbers
-                    Console.WriteLine($"\n{slotMachine[0, 0]} | {slotMachine[0, 1]} | {slotMachine[0, 2]}\n-- --  --\n{slotMachine[1, 0]} | {slotMachine[1, 1]} | {slotMachine[1, 2]}\n-- --  --\n{slotMachine[2, 0]} | {slotMachine[2, 1]} | {slotMachine[2, 2]}\n");
-
-                    // Using if else statement to check if the user win or lose 
-                    if ((slotMachine[0, 0] == slotMachine[0, 1] && slotMachine[0, 1] == slotMachine[0, 2]) ||
-                        (slotMachine[1, 0] == slotMachine[1, 1] && slotMachine[1, 1] == slotMachine[1, 2]) ||
-                        (slotMachine[2, 0] == slotMachine[2, 1] && slotMachine[2, 1] == slotMachine[2, 2]) ||
-                        (slotMachine[0, 0] == slotMachine[1, 1] && slotMachine[2, 2] == slotMachine[0, 0]))
-                    {
-                        if (userStake == stakeList[0])
-                        {
-                            money = money + winList[0];
-                        }
-                        if (userStake == stakeList[1])
-                        {
-                            money = money + winList[1];
-                        }
-                        if (userStake == stakeList[2])
-                        {
-                            money = money + winList[2];
-                        }
-                    }
-                    else
-                    {
-                        if (userStake == stakeList[0])
-                        {
-                            money = money - loseList[0];
-                        }
-                        if (userStake == stakeList[1])
-                        {
-                            money = money - loseList[1];
-                        }
-                        if (userStake == stakeList[2])
-                        {
-                            money = money - loseList[2];
-                        }
-                    }
-                    // Prompting how much money the user has left
-                    Console.WriteLine($"Bank: {money}$");
+                    Console.WriteLine("Invalid input. Please enter a valid positive amount");
+                    continue;
                 }
+                double initialBank = bank;
+                Console.WriteLine($"Intial money: {initialBank}");
+                
+                while (true)
+                {
+                    //Asking the user to place a bet
+                    Console.WriteLine("\nPlace a bet: ");
+                    double bet = Convert.ToDouble(Console.ReadLine());
+                    double money = bet;
+                    double playBank = bank - money;
+
+                    int lineVar;
+                    //Asking the user to select the line variant
+                    Console.WriteLine($"\nSelect line to play:\n 0 - horizontal\n 1 - vertical\n 2 - diagonal\n ");
+                    if (!int.TryParse(Console.ReadLine(), out lineVar) || lineVar < 0 || lineVar > 2)
+                    {
+                        Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the line variant.");
+                        continue;
+                    }
+
+                    int stakeIdx;
+                    //Asking the user to select a stake
+                    Console.WriteLine($"\nSelect stake:\n 0 - {stakeList[0]}cents\n 1 - {stakeList[1]}cents\n 2 - {stakeList[2]}cents\n ");
+                    if (!int.TryParse (Console.ReadLine(), out stakeIdx) || stakeIdx < 0 || stakeIdx > 2)
+                    {
+                        Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the stake.");
+                        continue;
+                    }
+                    int userStake = stakeList[stakeIdx];
+
+                    // Prompting the playing stake
+                    Console.WriteLine($"* Playing stake: {userStake}cents *");
+
+                    // Declaring a random variable
+                    Random random = new Random();
+
+                    // Declaring a 2D array
+                    int[,] slotMachine = new int[3, 3];
+
+                    // Asking the user to start the game
+                    Console.WriteLine("\n** Press 'Enter' to play **");
+
+                    while (Console.ReadKey().Key == ConsoleKey.Enter && money >= 0.10)
+                    {
+
+                        // Assigning a random number to each slot
+                        for (int r = 0; r < 3; r++)
+                        {
+                            for (int c = 0; c < 3; c++)
+                            {
+                                slotMachine[r, c] = random.Next(1, 10);
+                            }
+                        }
+
+                        // Prompting the slots with the random numbers
+                        Console.WriteLine($"\n{slotMachine[0, 0]} | {slotMachine[0, 1]} | {slotMachine[0, 2]}\n-- --  --\n{slotMachine[1, 0]} | {slotMachine[1, 1]} | {slotMachine[1, 2]}\n-- --  --\n{slotMachine[2, 0]} | {slotMachine[2, 1]} | {slotMachine[2, 2]}\n");
+
+                        // Using if statements to check if the user win or lose 
+                        bool isWin = false;
+                        if (lineVar == 0) // horizontal line
+                        {
+                            if (slotMachine[0, 0] == slotMachine[0, 1] && slotMachine[0, 1] == slotMachine[0, 2])
+                                isWin = true;
+                        }
+                        if (lineVar == 1) // vertical line
+                        {
+                            if (slotMachine[0, 0] == slotMachine[1, 1] && slotMachine[1, 1] == slotMachine[2, 0])
+                                isWin = true;
+                        }
+                        if (lineVar == 2) // diagonal line
+                        {
+                            if ((slotMachine[0, 0] == slotMachine[1, 1] && slotMachine[2, 2] == slotMachine[1, 1]) ||
+                                (slotMachine[0, 2] == slotMachine[1, 1] && slotMachine[2, 0] == slotMachine[1, 1]))
+                                isWin = true;
+                        }
+
+                        if (isWin)
+                        {
+                            if (userStake == stakeList[0])
+                            {
+                                money = money + winList[0];
+                            }
+                            if (userStake == stakeList[1])
+                            {
+                                money = money + winList[1];
+                            }
+                            if (userStake == stakeList[2])
+                            {
+                                money = money + winList[2];
+                            }
+                        }
+                        else
+                        {
+                            if (userStake == stakeList[0])
+                            {
+                                money = money - loseList[0];
+                            }
+                            if (userStake == stakeList[1])
+                            {
+                                money = money - loseList[1];
+                            }
+                            if (userStake == stakeList[2])
+                            {
+                                money = money - loseList[2];
+                            }
+                        }
+                        double newBank = playBank + money;
+                        bank = newBank;
+                        // Prompting how much money the user has left for bet 
+                        Console.WriteLine($"Bet: {money}$");
+                        // Prompting how much money the user has left in the bank
+                        Console.WriteLine($"Bank: {newBank}$");
+                    }
+                }
+                
             }
         }
     }
