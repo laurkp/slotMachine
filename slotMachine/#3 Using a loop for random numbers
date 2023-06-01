@@ -5,7 +5,7 @@ namespace slotMachine
     internal class Program
     {
         public const double MIN_MONEY = 0.10;
-        
+
         // Declaring a random variable
         static readonly Random random = new Random();
         static void Main(string[] args)
@@ -55,7 +55,7 @@ namespace slotMachine
                         continue;
                     }
                     int userStake = stakeList[stakeIdx];
-
+                    
                     // Prompting the playing stake
                     Console.WriteLine($"* Playing stake: {userStake}cents *");
 
@@ -101,33 +101,11 @@ namespace slotMachine
 
                         if (isWin)
                         {
-                            if (userStake == stakeList[0])
-                            {
-                                money = money + winList[0];
-                            }
-                            if (userStake == stakeList[1])
-                            {
-                                money = money + winList[1];
-                            }
-                            if (userStake == stakeList[2])
-                            {
-                                money = money + winList[2];
-                            }
+                            money += winList[stakeIdx];
                         }
                         else
                         {
-                            if (userStake == stakeList[0])
-                            {
-                                money = money - loseList[0];
-                            }
-                            if (userStake == stakeList[1])
-                            {
-                                money = money - loseList[1];
-                            }
-                            if (userStake == stakeList[2])
-                            {
-                                money = money - loseList[2];
-                            }
+                            money -= loseList[stakeIdx];
                         }
                         double newBank = playBank + money;
                         bank = newBank;
