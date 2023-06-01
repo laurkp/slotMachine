@@ -4,11 +4,11 @@ namespace slotMachine
 {
     internal class Program
     {
-        // Declaring a readonly random variable
+        // Declaring a random variable
         static readonly Random random = new Random();
-        
         static void Main(string[] args)
         {
+
             // Declaring lists for the stake, wins and loses
             List<int> stakeList = new List<int> { 10, 25, 50 };
             List<double> winList = new List<double> { 1, 2.5, 5 };
@@ -26,15 +26,13 @@ namespace slotMachine
                     Console.WriteLine("Invalid input. Please enter a valid positive amount");
                     continue;
                 }
-                double initialBank = bank;
-                Console.WriteLine($"Intial money: {initialBank}");
+                Console.WriteLine($"Intial money: {bank}");
                 
                 while (true)
                 {
                     //Asking the user to place a bet
                     Console.WriteLine("\nPlace a bet: ");
-                    double bet = Convert.ToDouble(Console.ReadLine());
-                    double money = bet;
+                    double money = Convert.ToDouble(Console.ReadLine());
                     double playBank = bank - money;
 
                     int lineVar;
