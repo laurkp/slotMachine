@@ -4,6 +4,9 @@ namespace slotMachine
 {
     internal class Program
     {
+        // Declaring a readonly random variable
+        static readonly Random random = new Random();
+        
         static void Main(string[] args)
         {
             // Declaring lists for the stake, wins and loses
@@ -55,9 +58,6 @@ namespace slotMachine
 
                     // Prompting the playing stake
                     Console.WriteLine($"* Playing stake: {userStake}cents *");
-
-                    // Declaring a random variable
-                    Random random = new Random();
 
                     // Declaring a 2D array
                     int[,] slotMachine = new int[3, 3];
