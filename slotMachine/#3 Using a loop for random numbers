@@ -4,6 +4,8 @@ namespace slotMachine
 {
     internal class Program
     {
+        public const double MIN_MONEY = 0.10;
+        
         // Declaring a random variable
         static readonly Random random = new Random();
         static void Main(string[] args)
@@ -63,7 +65,7 @@ namespace slotMachine
                     // Asking the user to start the game
                     Console.WriteLine("\n** Press 'Enter' to play **");
 
-                    while (Console.ReadKey().Key == ConsoleKey.Enter && money >= 0.10)
+                    while (Console.ReadKey().Key == ConsoleKey.Enter && money >= MIN_MONEY)
                     {
 
                         // Assigning a random number to each slot
