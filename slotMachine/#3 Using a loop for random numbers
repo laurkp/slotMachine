@@ -5,65 +5,40 @@ namespace slotMachine
     internal class Program
     {
         public const double MIN_MONEY = 0.10;
-
+        
         // Declaring a random variable
         static readonly Random random = new Random();
         static void Main(string[] args)
         {
-
-            // Declaring lists for the stake, wins and loses
-            List<int> stakeList = new List<int> { 10, 25, 50 };
-            List<double> winList = new List<double> { 1, 2.5, 5 };
-            List<double> loseList = new List<double> { 0.10, 0.25, 0.5 };
-
             while (true)
             {
                 // Prompting welcome message
-                Console.WriteLine("*** WELCOME TO THE SLOT MACHINE ***");
+                SlotMethods.Welcome();
 
-                Console.WriteLine("Insert the amount of money you want to play: ");
-                double bank;
-                if (!Double.TryParse(Console.ReadLine(), out bank) || bank <= 0)
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid positive amount");
-                    continue;
-                }
-                Console.WriteLine($"Intial money: {bank}");
+                double inputAmount = 0;
+                double bank = SlotMethods.MoneyToPlay(inputAmount); ;
                 
                 while (true)
                 {
                     //Asking the user to place a bet
-                    Console.WriteLine("\nPlace a bet: ");
-                    double money = Convert.ToDouble(Console.ReadLine());
+                    double money = SlotMethods.Bet(inputAmount);
                     double playBank = bank - money;
 
-                    int lineVar;
                     //Asking the user to select the line variant
-                    Console.WriteLine($"\nSelect line to play:\n 0 - horizontal\n 1 - vertical\n 2 - diagonal\n ");
-                    if (!int.TryParse(Console.ReadLine(), out lineVar) || lineVar < 0 || lineVar > 2)
-                    {
-                        Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the line variant.");
-                        continue;
-                    }
+                    int linePlay = 0;
+                    int lineVar = SlotMethods.LineToPlay(linePlay);
 
-                    int stakeIdx;
                     //Asking the user to select a stake
-                    Console.WriteLine($"\nSelect stake:\n 0 - {stakeList[0]}cents\n 1 - {stakeList[1]}cents\n 2 - {stakeList[2]}cents\n ");
-                    if (!int.TryParse (Console.ReadLine(), out stakeIdx) || stakeIdx < 0 || stakeIdx > 2)
-                    {
-                        Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the stake.");
-                        continue;
-                    }
-                    int userStake = stakeList[stakeIdx];
-                    
+                    int userStake = SlotMethods.StakeToPlay();
+
                     // Prompting the playing stake
-                    Console.WriteLine($"* Playing stake: {userStake}cents *");
+                    SlotMethods.UserStake(userStake);
 
                     // Declaring a 2D array
                     int[,] slotMachine = new int[3, 3];
 
                     // Asking the user to start the game
-                    Console.WriteLine("\n** Press 'Enter' to play **");
+                    SlotMethods.StartToPlay();
 
                     while (Console.ReadKey().Key == ConsoleKey.Enter && money >= MIN_MONEY)
                     {
@@ -78,7 +53,7 @@ namespace slotMachine
                         }
 
                         // Prompting the slots with the random numbers
-                        Console.WriteLine($"\n{slotMachine[0, 0]} | {slotMachine[0, 1]} | {slotMachine[0, 2]}\n-- --  --\n{slotMachine[1, 0]} | {slotMachine[1, 1]} | {slotMachine[1, 2]}\n-- --  --\n{slotMachine[2, 0]} | {slotMachine[2, 1]} | {slotMachine[2, 2]}\n");
+                        SlotMethods.PromptSlots(slotMachine);
 
                         // Using if statements to check if the user win or lose 
                         bool isWin = false;
@@ -101,18 +76,19 @@ namespace slotMachine
 
                         if (isWin)
                         {
-                            money += winList[stakeIdx];
+                            money += SlotMethods.winList[userStake];
                         }
                         else
                         {
-                            money -= loseList[stakeIdx];
+                            money -= SlotMethods.loseList[userStake];
                         }
+
                         double newBank = playBank + money;
                         bank = newBank;
                         // Prompting how much money the user has left for bet 
-                        Console.WriteLine($"Bet: {money}$");
+                        SlotMethods.PromptBet(money);
                         // Prompting how much money the user has left in the bank
-                        Console.WriteLine($"Bank: {newBank}$");
+                        SlotMethods.PromptBank(newBank);
                     }
                 }
                 
