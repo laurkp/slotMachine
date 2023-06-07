@@ -9,12 +9,6 @@ namespace slotMachine
     internal class SlotMethods
     {
         /// <summary>
-        /// // Declaring lists for the stake, wins and loses
-        /// </summary>
-        public static List<int> stakeList = new List<int> { 10, 25, 50 };
-        public static List<double> winList = new List<double> { 1, 2.5, 5 };
-        public static List<double> loseList = new List<double> { 0.10, 0.25, 0.5 };
-        /// <summary>
         /// Welcoming message
         /// </summary>
         public static void  Welcome()
@@ -74,18 +68,19 @@ namespace slotMachine
         /// Asking the user to select a stake
         /// </summary>
         /// <returns></returns>
-        public static int StakeToPlay() 
+        public static int StakeToPlay(List<int> list) 
         {
             int stakeIndex;
-            Console.WriteLine($"\nSelect stake:\n 0 - {stakeList[0]}cents\n 1 - {stakeList[1]}cents\n 2 - {stakeList[2]}cents\n ");
+            Console.WriteLine($"\nSelect stake:\n 0 - {list[0]}cents\n 1 - {list[1]}cents\n 2 - {list[2]}cents\n ");
             
             if (!int.TryParse(Console.ReadLine(), out stakeIndex) || stakeIndex < 0 || stakeIndex > 2)
             {
                 Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the stake.");
                 stakeIndex = Convert.ToInt32(Console.ReadLine());
             }
-            return stakeList[stakeIndex];
+            return stakeIndex;
         }
+        
         /// <summary>
         /// Prompting the playing stake
         /// </summary>
@@ -113,6 +108,7 @@ namespace slotMachine
             Console.WriteLine($"\n{slots[0, 0]} | {slots[0, 1]} | {slots[0, 2]}\n-- --  --\n{slots[1, 0]} | {slots[1, 1]} | {slots[1, 2]}\n-- --  --\n{slots[2, 0]} | {slots[2, 1]} | {slots[2, 2]}\n");
             return slots;
         }
+
         /// <summary>
         /// Prompting the bet amount
         /// </summary>
