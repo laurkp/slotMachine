@@ -10,6 +10,10 @@ namespace slotMachine
         static readonly Random random = new Random();
         static void Main(string[] args)
         {
+            // Declaring lists for the stake, wins and loses
+            List<int> stakeList = new List<int> { 10, 25, 50 };
+            List<double> winList = new List<double> { 1, 2.5, 5 };
+            List<double> loseList = new List<double> { 0.10, 0.25, 0.5 };
             while (true)
             {
                 // Prompting welcome message
@@ -29,8 +33,9 @@ namespace slotMachine
                     int lineVar = SlotMethods.LineToPlay(linePlay);
 
                     //Asking the user to select a stake
-                    int userStake = SlotMethods.StakeToPlay();
-
+                    int stakeIdx = SlotMethods.StakeToPlay(stakeList); ;
+                    int userStake = stakeList[stakeIdx];
+                    
                     // Prompting the playing stake
                     SlotMethods.UserStake(userStake);
 
@@ -76,11 +81,11 @@ namespace slotMachine
 
                         if (isWin)
                         {
-                            money += SlotMethods.winList[userStake];
+                            money += winList[stakeIdx];
                         }
                         else
                         {
-                            money -= SlotMethods.loseList[userStake];
+                            money -= loseList[stakeIdx];
                         }
 
                         double newBank = playBank + money;
