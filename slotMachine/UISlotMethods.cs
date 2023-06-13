@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace slotMachine
 {
-    internal class SlotMethods
+    internal class UISlotMethods
     {
         /// <summary>
         /// Welcoming message
@@ -21,8 +21,9 @@ namespace slotMachine
         /// </summary>
         /// <param name="amount"></param>
         /// <returns>How much money the user plays</returns>
-        public static double MoneyToPlay(double amount)
+        public static double MoneyToPlay()
         {
+            double amount;
             Console.WriteLine("Insert the amount of money you want to play: ");
             
             if (!Double.TryParse(Console.ReadLine(), out amount) || amount <= 0)
@@ -38,8 +39,9 @@ namespace slotMachine
         /// </summary>
         /// <param name="betAmount"></param>
         /// <returns></returns>
-        public static double Bet(double betAmount) 
+        public static double Bet() 
         {
+            double betAmount;
             Console.WriteLine("\nPlace a bet: ");
 
             if(!Double.TryParse(Console.ReadLine() , out betAmount) || betAmount <= 0)
@@ -54,8 +56,9 @@ namespace slotMachine
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
-        public static int LineToPlay(int line) 
+        public static int LineToPlay() 
         {
+            int line;
             Console.WriteLine($"\nSelect line to play:\n 0 - horizontal\n 1 - vertical\n 2 - diagonal\n ");
             if (!int.TryParse(Console.ReadLine(), out line) || line < 0 || line > 2)
             {
@@ -86,10 +89,9 @@ namespace slotMachine
         /// </summary>
         /// <param name="stake"></param>
         /// <returns></returns>
-        public static int UserStake(int stake)
+        public static void UserStake(int stake)
         {
             Console.WriteLine($"* Playing stake: {stake}cents *");
-            return stake;
         }
         /// <summary>
         /// Asking the user to play
@@ -103,10 +105,9 @@ namespace slotMachine
         /// </summary>
         /// <param name="slots"></param>
         /// <returns></returns>
-        public static int[,] PromptSlots(int[,] slots)
+        public static void PromptSlots(int[,] slots)
         {
-            Console.WriteLine($"\n{slots[0, 0]} | {slots[0, 1]} | {slots[0, 2]}\n-- --  --\n{slots[1, 0]} | {slots[1, 1]} | {slots[1, 2]}\n-- --  --\n{slots[2, 0]} | {slots[2, 1]} | {slots[2, 2]}\n");
-            return slots;
+            Console.WriteLine($"\n{slots[0, 0]} | {slots[0, 1]} | {slots[0, 2]}\n-- --  --\n{slots[1, 0]} | {slots[1, 1]} | {slots[1, 2]}\n-- --  --\n{slots[2, 0]} | {slots[2, 1]} | {slots[2, 2]}\n");        
         }
 
         /// <summary>
@@ -114,20 +115,18 @@ namespace slotMachine
         /// </summary>
         /// <param name="bet"></param>
         /// <returns></returns>
-        public static double PromptBet(double bet)
+        public static void PromptBet(double bet)
         {
             Console.WriteLine($"Bet: {bet}$");
-            return bet;
         }
         /// <summary>
         /// Prompting how much money are left during the game
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public static double PromptBank(double bank)
+        public static void PromptBank(double bank)
         {
             Console.WriteLine($"Bank: {bank}$");
-            return bank;
         }
     }
 }
