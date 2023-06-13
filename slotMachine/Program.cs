@@ -38,7 +38,7 @@ namespace slotMachine
                     UISlotMethods.UserStake(userStake);
 
                     // Declaring a 2D array
-                    int[,] slotMachine = new int[3, 3];
+                    int[,] slotMachine = new int[Logic.NUMBER_OF_SLOTS, Logic.NUMBER_OF_SLOTS];
 
                     // Asking the user to start the game
                     UISlotMethods.StartToPlay();

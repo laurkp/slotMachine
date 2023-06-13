@@ -12,6 +12,9 @@ namespace slotMachine
         // Declaring a random variable
         static readonly Random random = new Random();
 
+        // Declaring a constant for the number of slots in each row and colum
+        public const int NUMBER_OF_SLOTS = 3;
+
         /// <summary>
         /// Calculating winnings and loses
         /// </summary>
@@ -40,9 +43,9 @@ namespace slotMachine
         /// <param name="slot"></param>
         public static void SlotNumbers(int[,] slot)
         {
-            for (int r = 0; r < 3; r++)
+            for (int r = 0; r < NUMBER_OF_SLOTS; r++)
             {
-                for (int c = 0; c < 3; c++)
+                for (int c = 0; c < NUMBER_OF_SLOTS; c++)
                 {
                     slot[r, c] = random.Next(1, 10);
                 }
