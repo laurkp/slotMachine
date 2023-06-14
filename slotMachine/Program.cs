@@ -23,7 +23,8 @@ namespace slotMachine
                 while (true)
                 {
                     //Asking the user to place a bet
-                    double betAmount = UISlotMethods.Bet();
+                    double betAmount = UISlotMethods.Bet(moneyToPlay);
+
                     double playBank = moneyToPlay - betAmount;
 
                     //Asking the user to select the line variant
@@ -47,7 +48,7 @@ namespace slotMachine
                     {
 
                         // Assigning a random number to each slot
-                        Logic.SlotNumbers(slotMachine);
+                        Logic.AssignDynamicSlotNumbers(slotMachine);
 
                         // Prompting the slots with the random numbers
                         UISlotMethods.PromptSlots(slotMachine);
@@ -65,6 +66,7 @@ namespace slotMachine
                         // Prompting how much money the user has left in the bank
                         UISlotMethods.PromptBank(newBank);
                     }
+                    break;
                 }
                 
             }

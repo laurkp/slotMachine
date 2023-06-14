@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,14 +40,14 @@ namespace slotMachine
         /// </summary>
         /// <param name="betAmount"></param>
         /// <returns></returns>
-        public static double Bet() 
+        public static double Bet(double playMoney) 
         {
             double betAmount;
             Console.WriteLine("\nPlace a bet: ");
 
-            if(!Double.TryParse(Console.ReadLine() , out betAmount) || betAmount <= 0)
+            if(!Double.TryParse(Console.ReadLine() , out betAmount) || betAmount <= 0 || betAmount > playMoney)
             {
-                Console.WriteLine("Invalid bet. Please place a new bet: ");
+                Console.WriteLine($"Invalid bet. Please place a new bet equal or lower than {playMoney}: ");
                 betAmount = Convert.ToDouble(Console.ReadLine());
             }
             return betAmount;
