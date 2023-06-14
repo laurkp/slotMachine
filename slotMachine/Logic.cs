@@ -41,7 +41,7 @@ namespace slotMachine
         /// Assigning random numbers to the slots
         /// </summary>
         /// <param name="slot"></param>
-        public static void SlotNumbers(int[,] slot)
+        public static void AssignDynamicSlotNumbers(int[,] slot)
         {
             for (int r = 0; r < NUMBER_OF_SLOTS; r++)
             {

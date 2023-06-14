@@ -65,7 +65,6 @@ namespace slotMachine
                         // Prompting how much money the user has left in the bank
                         UISlotMethods.PromptBank(newBank);
                     }
-                    break;
                 }
                 
             }
