@@ -18,13 +18,13 @@ namespace slotMachine
                 UISlotMethods.Welcome();
 
              
-                double bank = UISlotMethods.MoneyToPlay();
+                double moneyToPlay = UISlotMethods.MoneyToPlay();
                 
                 while (true)
                 {
                     //Asking the user to place a bet
-                    double money = UISlotMethods.Bet();
-                    double playBank = bank - money;
+                    double betAmount = UISlotMethods.Bet();
+                    double playBank = moneyToPlay - betAmount;
 
                     //Asking the user to select the line variant
                     
@@ -43,7 +43,7 @@ namespace slotMachine
                     // Asking the user to start the game
                     UISlotMethods.StartToPlay();
 
-                    while (Console.ReadKey().Key == ConsoleKey.Enter && money >= MIN_MONEY)
+                    while (Console.ReadKey().Key == ConsoleKey.Enter && betAmount >= MIN_MONEY)
                     {
 
                         // Assigning a random number to each slot
@@ -56,12 +56,12 @@ namespace slotMachine
                         bool isWin = Logic.CheckIfWinOrLose(slotMachine, lineVar);
 
                         // Calculating the winnings and loses
-                        money = Logic.CalcWinnings(winList, loseList, stakeIdx, isWin, money);
+                        betAmount = Logic.CalcWinnings(winList, loseList, stakeIdx, isWin, betAmount);
 
-                        double newBank = playBank + money;
-                        bank = newBank;
+                        double newBank = playBank + betAmount;
+                        
                         // Prompting how much money the user has left for bet 
-                        UISlotMethods.PromptBet(money);
+                        UISlotMethods.PromptBet(betAmount);
                         // Prompting how much money the user has left in the bank
                         UISlotMethods.PromptBank(newBank);
                     }
