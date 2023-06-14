@@ -24,17 +24,17 @@ namespace slotMachine
         /// <param name="Win"></param>
         /// <param name="cash"></param>
         /// <returns></returns>
-        public static double CalcWinnings(List<double> win, List<double> lose, int index, bool Win, double cash)
+        public static double CalcWinnings(List<double> winningAmount, List<double> losingAmount, int index, bool userWon)
         {
-            if (Win)
+            
+            if (userWon)
             {
-                cash += win[index];
+               return winningAmount[index];
             }
             else
             {
-                cash -= lose[index];
+               return losingAmount[index]*-1;
             }
-            return cash;
         }
 
         /// <summary>

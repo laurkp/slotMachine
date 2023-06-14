@@ -56,7 +56,7 @@ namespace slotMachine
                         bool isWin = Logic.CheckIfWinOrLose(slotMachine, lineVar);
 
                         // Calculating the winnings and loses
-                        betAmount = Logic.CalcWinnings(winList, loseList, stakeIdx, isWin, betAmount);
+                        betAmount += Logic.CalcWinnings(winList, loseList, stakeIdx, isWin);
 
                         double newBank = playBank + betAmount;
                         
