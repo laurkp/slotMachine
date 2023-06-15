@@ -5,6 +5,7 @@ namespace slotMachine
     internal class Program
     {
         public const double MIN_MONEY = 0.10;
+        public const double NO_FUNDS = 0; 
         
         static void Main(string[] args)
         {
@@ -59,16 +60,18 @@ namespace slotMachine
                         // Calculating the winnings and loses
                         betAmount += Logic.CalcWinnings(winList, loseList, stakeIdx, isWin);
 
-                        double newBank = playBank + betAmount;
+                        moneyToPlay = playBank + betAmount;
                         
                         // Prompting how much money the user has left for bet 
                         UISlotMethods.PromptBet(betAmount);
                         // Prompting how much money the user has left in the bank
-                        UISlotMethods.PromptBank(newBank);
+                        UISlotMethods.PromptBank(moneyToPlay);
                     }
-                    break;
-                }
-                
+                    if(moneyToPlay == NO_FUNDS)
+                    {
+                        break;
+                    }
+                }  
             }
         }
     }
