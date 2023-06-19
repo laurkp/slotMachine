@@ -19,7 +19,7 @@ namespace slotMachine
         /// </summary>
         /// <param name="amount"></param>
         /// <returns>How much money the user plays</returns>
-        public static double MoneyToPlay()
+        public static double SelectMoneyToPlay()
         {
             double amount;
             Console.WriteLine("Insert the amount of money you want to play: ");
@@ -41,7 +41,7 @@ namespace slotMachine
         /// </summary>
         /// <param name="betAmount"></param>
         /// <returns></returns>
-        public static double Bet(double playMoney) 
+        public static double SelectBet(double playMoney) 
         {
             double betAmount;
             Console.WriteLine("\nPlace a bet: ");
@@ -62,7 +62,7 @@ namespace slotMachine
         /// </summary>
         /// <param name="line"></param>
         /// <returns></returns>
-        public static int LineToPlay() 
+        public static int SelectLineToPlay() 
         {
             int line;
             Console.WriteLine($"\nSelect line to play:\n 0 - horizontal\n 1 - vertical\n 2 - diagonal\n ");
@@ -81,11 +81,13 @@ namespace slotMachine
         /// Asking the user to select a stake
         /// </summary>
         /// <returns></returns>
-        public static int StakeToPlay(List<int> list) 
+        public static int SelectStakeToPlay(List<int> list, List<double> wins, List<double> loses) 
         {
             int stakeIndex;
             Console.WriteLine($"\nSelect stake:\n 0 - {list[0]}cents\n 1 - {list[1]}cents\n 2 - {list[2]}cents\n ");
-            
+            Console.WriteLine($"For each play depending on the stake:\n{list[0]}cents win ${wins[0]} / lose {loses[0]}cents\n{list[1]}cents win ${wins[1]} / lose {loses[1]}cents\n{list[2]}cents win ${wins[2]} / lose {loses[2]}cents\n");
+
+
             while (!int.TryParse(Console.ReadLine(), out stakeIndex) || stakeIndex < 0 || stakeIndex > 2)
             {
                 Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the stake.");
@@ -103,14 +105,14 @@ namespace slotMachine
         /// </summary>
         /// <param name="stake"></param>
         /// <returns></returns>
-        public static void UserStake(int stake)
+        public static void ShowUserStake(int stake)
         {
             Console.WriteLine($"* Playing stake: {stake}cents *");
         }
         /// <summary>
         /// Asking the user to play
         /// </summary>
-        public static void StartToPlay()
+        public static void ShowStartToPlay()
         {
             Console.WriteLine("\n** Press 'Enter' to play **");
         }
@@ -119,7 +121,7 @@ namespace slotMachine
         /// </summary>
         /// <param name="slots"></param>
         /// <returns></returns>
-        public static void PromptSlots(int[,] slots)
+        public static void ShowSlots(int[,] slots)
         {
             Console.WriteLine($"\n{slots[0, 0]} | {slots[0, 1]} | {slots[0, 2]}\n-- --  --\n{slots[1, 0]} | {slots[1, 1]} | {slots[1, 2]}\n-- --  --\n{slots[2, 0]} | {slots[2, 1]} | {slots[2, 2]}\n");        
         }
@@ -129,7 +131,7 @@ namespace slotMachine
         /// </summary>
         /// <param name="bet"></param>
         /// <returns></returns>
-        public static void PromptBet(double bet)
+        public static void ShowBet(double bet)
         {
             Console.WriteLine($"Bet: {bet}$");
         }
@@ -138,7 +140,7 @@ namespace slotMachine
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public static void PromptBank(double bank)
+        public static void ShowBank(double bank)
         {
             Console.WriteLine($"Bank: {bank}$");
         }

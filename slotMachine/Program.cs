@@ -20,31 +20,31 @@ namespace slotMachine
                 UISlotMethods.Welcome();
 
              
-                double moneyToPlay = UISlotMethods.MoneyToPlay();
+                double moneyToPlay = UISlotMethods.SelectMoneyToPlay();
                 
                 while (true)
                 {
                     //Asking the user to place a bet
-                    double betAmount = UISlotMethods.Bet(moneyToPlay);
+                    double betAmount = UISlotMethods.SelectBet(moneyToPlay);
 
                     double playBank = moneyToPlay - betAmount;
 
                     //Asking the user to select the line variant
                     
-                    int lineVar = UISlotMethods.LineToPlay();
+                    int lineVar = UISlotMethods.SelectLineToPlay();
 
                     //Asking the user to select a stake
-                    int stakeIdx = UISlotMethods.StakeToPlay(stakeList); ;
+                    int stakeIdx = UISlotMethods.SelectStakeToPlay(stakeList, winList, loseList); ;
                     int userStake = stakeList[stakeIdx];
                     
                     // Prompting the playing stake
-                    UISlotMethods.UserStake(userStake);
+                    UISlotMethods.ShowUserStake(userStake);
 
                     // Declaring a 2D array
                     int[,] slotMachine = new int[Logic.NUMBER_OF_SLOTS, Logic.NUMBER_OF_SLOTS];
 
                     // Asking the user to start the game
-                    UISlotMethods.StartToPlay();
+                    UISlotMethods.ShowStartToPlay();
 
                     while (Console.ReadKey().Key == ConsoleKey.Enter && betAmount >= MIN_MONEY)
                     {
@@ -53,7 +53,7 @@ namespace slotMachine
                         Logic.AssignDynamicSlotNumbers(slotMachine);
 
                         // Prompting the slots with the random numbers
-                        UISlotMethods.PromptSlots(slotMachine);
+                        UISlotMethods.ShowSlots(slotMachine);
 
                         // Using if statements to check if the user win or lose 
                         bool isWin = Logic.CheckIfWinOrLose(slotMachine, lineVar);
@@ -64,9 +64,9 @@ namespace slotMachine
                         moneyToPlay = playBank + betAmount;
                         
                         // Prompting how much money the user has left for bet 
-                        UISlotMethods.PromptBet(betAmount);
+                        UISlotMethods.ShowBet(betAmount);
                         // Prompting how much money the user has left in the bank
-                        UISlotMethods.PromptBank(moneyToPlay);
+                        UISlotMethods.ShowBank(moneyToPlay);
                     }
                     if(moneyToPlay == NO_FUNDS)
                     {
