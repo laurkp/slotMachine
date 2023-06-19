@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿
 
 namespace slotMachine
 {
@@ -13,6 +13,7 @@ namespace slotMachine
             List<int> stakeList = new List<int> { 10, 25, 50 };
             List<double> winList = new List<double> { 1, 2.5, 5 };
             List<double> loseList = new List<double> { 0.10, 0.25, 0.5 };
+            
             while (true)
             {
                 // Prompting welcome message
@@ -70,8 +71,9 @@ namespace slotMachine
                     if(moneyToPlay == NO_FUNDS)
                     {
                         break;
-                    }
-                }  
+                    } 
+                }
+
             }
         }
     }

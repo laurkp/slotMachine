@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace slotMachine
 {
@@ -60,24 +55,24 @@ namespace slotMachine
         /// <returns></returns>
         public static bool CheckIfWinOrLose(int[,] slot, int line)
         {
-            bool Win = false;
+            bool win = false;
             if (line == 0) // horizontal line
             {
                 if (slot[0, 0] == slot[0, 1] && slot[0, 1] == slot[0, 2])
-                    Win = true;
+                    win = true;
             }
             if (line == 1) // vertical line
             {
                 if (slot[0, 0] == slot[1, 1] && slot[1, 1] == slot[2, 0])
-                    Win = true;
+                    win = true;
             }
             if (line == 2) // diagonal line
             {
                 if ((slot[0, 0] == slot[1, 1] && slot[2, 2] == slot[1, 1]) ||
                     (slot[0, 2] == slot[1, 1] && slot[2, 0] == slot[1, 1]))
-                    Win = true;
+                    win = true;
             }
-            return Win;
+            return win;
         }
     }
 }

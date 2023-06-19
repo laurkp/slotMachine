@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace slotMachine
 {
     internal class UISlotMethods
     {
+        public const int OPTION_ONE = 1;
+        
         /// <summary>
         /// Welcoming message
         /// </summary>
@@ -27,10 +24,14 @@ namespace slotMachine
             double amount;
             Console.WriteLine("Insert the amount of money you want to play: ");
             
-            if (!Double.TryParse(Console.ReadLine(), out amount) || amount <= 0)
+            while (!Double.TryParse(Console.ReadLine(), out amount) || amount <= 0)
             {
                 Console.WriteLine("Invalid input. Please enter a valid positive amount");
                 amount = Convert.ToDouble(Console.ReadLine());
+                if (amount > 0)
+                {
+                    break;
+                }     
             }
             Console.WriteLine($"Intial money: {amount}");
             return amount;
@@ -45,10 +46,14 @@ namespace slotMachine
             double betAmount;
             Console.WriteLine("\nPlace a bet: ");
 
-            if(!Double.TryParse(Console.ReadLine() , out betAmount) || betAmount <= 0 || betAmount > playMoney)
+            while(!Double.TryParse(Console.ReadLine() , out betAmount) || betAmount <= 0 || betAmount > playMoney)
             {
                 Console.WriteLine($"Invalid bet. Please place a new bet equal or lower than {playMoney}: ");
                 betAmount = Convert.ToDouble(Console.ReadLine());
+                if (betAmount > 0 && betAmount <= playMoney)
+                {
+                    break;
+                }
             }
             return betAmount;
         }
@@ -61,10 +66,14 @@ namespace slotMachine
         {
             int line;
             Console.WriteLine($"\nSelect line to play:\n 0 - horizontal\n 1 - vertical\n 2 - diagonal\n ");
-            if (!int.TryParse(Console.ReadLine(), out line) || line < 0 || line > 2)
+            while (!int.TryParse(Console.ReadLine(), out line) || line < 0 || line > 2)
             {
                 Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the line variant.");
                 line = Convert.ToInt32(Console.ReadLine());
+                if (line >= 0 && line <= 2)
+                {
+                    break;
+                }
             }
             return line;
         }
@@ -77,10 +86,14 @@ namespace slotMachine
             int stakeIndex;
             Console.WriteLine($"\nSelect stake:\n 0 - {list[0]}cents\n 1 - {list[1]}cents\n 2 - {list[2]}cents\n ");
             
-            if (!int.TryParse(Console.ReadLine(), out stakeIndex) || stakeIndex < 0 || stakeIndex > 2)
+            while (!int.TryParse(Console.ReadLine(), out stakeIndex) || stakeIndex < 0 || stakeIndex > 2)
             {
                 Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the stake.");
                 stakeIndex = Convert.ToInt32(Console.ReadLine());
+                if (stakeIndex >= 0 && stakeIndex <= 2)
+                {
+                    break;
+                }
             }
             return stakeIndex;
         }
@@ -129,5 +142,7 @@ namespace slotMachine
         {
             Console.WriteLine($"Bank: {bank}$");
         }
+
+
     }
 }
