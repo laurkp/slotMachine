@@ -13,8 +13,9 @@ namespace slotMachine
             List<int> stakeList = new List<int> { 10, 25, 50 };
             List<double> winList = new List<double> { 1, 2.5, 5 };
             List<double> loseList = new List<double> { 0.10, 0.25, 0.5 };
-            
-            while (true)
+
+            bool play = true;
+            while (play)
             {
                 // Prompting welcome message
                 UISlotMethods.Welcome();
@@ -25,7 +26,7 @@ namespace slotMachine
                 while (true)
                 {
                     //Asking the user to place a bet
-                    double betAmount = UISlotMethods.SelectBet(moneyToPlay);
+                    double betAmount = UISlotMethods.SelectBetAmount(moneyToPlay);
 
                     double playBank = moneyToPlay - betAmount;
 
@@ -64,16 +65,16 @@ namespace slotMachine
                         moneyToPlay = playBank + betAmount;
                         
                         // Prompting how much money the user has left for bet 
-                        UISlotMethods.ShowBet(betAmount);
+                        UISlotMethods.ShowBetAmountLeft(betAmount);
                         // Prompting how much money the user has left in the bank
-                        UISlotMethods.ShowBank(moneyToPlay);
+                        UISlotMethods.ShowBankAmountLeft(moneyToPlay);
                     }
                     if(moneyToPlay == NO_FUNDS)
                     {
                         break;
                     } 
                 }
-
+                UISlotMethods.AskIfKeepPlaying(play);
             }
         }
     }

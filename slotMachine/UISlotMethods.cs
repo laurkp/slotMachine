@@ -4,7 +4,6 @@ namespace slotMachine
 {
     internal class UISlotMethods
     {
-        public const int OPTION_ONE = 1;
         
         /// <summary>
         /// Welcoming message
@@ -41,7 +40,7 @@ namespace slotMachine
         /// </summary>
         /// <param name="betAmount"></param>
         /// <returns></returns>
-        public static double SelectBet(double playMoney) 
+        public static double SelectBetAmount(double playMoney) 
         {
             double betAmount;
             Console.WriteLine("\nPlace a bet: ");
@@ -81,12 +80,11 @@ namespace slotMachine
         /// Asking the user to select a stake
         /// </summary>
         /// <returns></returns>
-        public static int SelectStakeToPlay(List<int> list, List<double> wins, List<double> loses) 
+        public static int SelectStakeToPlay(List<int> list, List<double> wins, List<double> loses)
         {
             int stakeIndex;
-            Console.WriteLine($"\nSelect stake:\n 0 - {list[0]}cents\n 1 - {list[1]}cents\n 2 - {list[2]}cents\n ");
             Console.WriteLine($"For each play depending on the stake:\n{list[0]}cents win ${wins[0]} / lose {loses[0]}cents\n{list[1]}cents win ${wins[1]} / lose {loses[1]}cents\n{list[2]}cents win ${wins[2]} / lose {loses[2]}cents\n");
-
+            Console.WriteLine($"\nSelect stake:\n 0 - {list[0]}cents\n 1 - {list[1]}cents\n 2 - {list[2]}cents\n ");
 
             while (!int.TryParse(Console.ReadLine(), out stakeIndex) || stakeIndex < 0 || stakeIndex > 2)
             {
@@ -131,7 +129,7 @@ namespace slotMachine
         /// </summary>
         /// <param name="bet"></param>
         /// <returns></returns>
-        public static void ShowBet(double bet)
+        public static void ShowBetAmountLeft(double bet)
         {
             Console.WriteLine($"Bet: {bet}$");
         }
@@ -140,11 +138,30 @@ namespace slotMachine
         /// </summary>
         /// <param name="bank"></param>
         /// <returns></returns>
-        public static void ShowBank(double bank)
+        public static void ShowBankAmountLeft(double bank)
         {
             Console.WriteLine($"Bank: {bank}$");
         }
 
-
+        public static bool AskIfKeepPlaying(bool chooseToPlay)
+        {
+            int keepPlaying;
+            
+            Console.WriteLine("Do you want to play again?\nSelect: 1 - Yes\n 2 - No");
+            while(!int.TryParse(Console.ReadLine(), out keepPlaying) || keepPlaying < 1 || keepPlaying > 2)
+            {
+                Console.WriteLine("Invalid input. Please select 1 or 2.");
+                keepPlaying = Convert.ToInt32(Console.ReadLine());
+                if (keepPlaying >= 1 && keepPlaying <= 2)
+                {
+                    break;
+                }
+            }
+            if(keepPlaying == 2)
+            {
+                chooseToPlay = false; 
+            }
+            return chooseToPlay;
+        }
     }
 }
