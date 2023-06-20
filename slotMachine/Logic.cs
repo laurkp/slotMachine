@@ -31,7 +31,6 @@ namespace slotMachine
                return losingAmount[index]*-1;
             }
         }
-
         /// <summary>
         /// Assigning random numbers to the slots
         /// </summary>
@@ -46,7 +45,6 @@ namespace slotMachine
                 }
             }
         }
-
         /// <summary>
         /// Checking if the line win or lose
         /// </summary>

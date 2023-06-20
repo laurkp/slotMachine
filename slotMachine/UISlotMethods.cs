@@ -4,7 +4,6 @@ namespace slotMachine
 {
     internal class UISlotMethods
     {
-        
         /// <summary>
         /// Welcoming message
         /// </summary>
@@ -12,7 +11,6 @@ namespace slotMachine
         {
             Console.WriteLine("*** WELCOME TO THE SLOT MACHINE ***");
         }
-
         /// <summary>
         /// // Asking the user how much money would like to play
         /// </summary>
@@ -97,7 +95,6 @@ namespace slotMachine
             }
             return stakeIndex;
         }
-        
         /// <summary>
         /// Prompting the playing stake
         /// </summary>
@@ -123,7 +120,6 @@ namespace slotMachine
         {
             Console.WriteLine($"\n{slots[0, 0]} | {slots[0, 1]} | {slots[0, 2]}\n-- --  --\n{slots[1, 0]} | {slots[1, 1]} | {slots[1, 2]}\n-- --  --\n{slots[2, 0]} | {slots[2, 1]} | {slots[2, 2]}\n");        
         }
-
         /// <summary>
         /// Prompting the bet amount
         /// </summary>
@@ -142,7 +138,6 @@ namespace slotMachine
         {
             Console.WriteLine($"Bank: {bank}$");
         }
-
         public static int AskIfKeepPlaying()
         {
             int keepPlaying;

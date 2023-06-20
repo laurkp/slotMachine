@@ -6,8 +6,7 @@ namespace slotMachine
     {
         public const double MIN_MONEY = 0.10;
         public const double NO_FUNDS = 0;
-        public const int CONDITION = 1;
-        
+        public const int CONDITION = 1; 
         static void Main(string[] args)
         {
             // Declaring lists for the stake, wins and loses
@@ -50,7 +49,6 @@ namespace slotMachine
 
                     while (Console.ReadKey().Key == ConsoleKey.Enter && betAmount >= MIN_MONEY)
                     {
-
                         // Assigning a random number to each slot
                         Logic.AssignDynamicSlotNumbers(slotMachine);
 
