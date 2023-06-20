@@ -18,10 +18,10 @@ namespace slotMachine
         /// <returns>How much money the user plays</returns>
         public static double SelectMoneyToPlay()
         {
-            double amount;
             Console.WriteLine("Insert the amount of money you want to play: ");
-            
-            while (!Double.TryParse(Console.ReadLine(), out amount) || amount <= 0)
+            double amount = Convert.ToDouble(Console.ReadLine());
+
+            while (amount <= 0)
             {
                 Console.WriteLine("Invalid input. Please enter a valid positive amount");
                 amount = Convert.ToDouble(Console.ReadLine());
@@ -40,10 +40,10 @@ namespace slotMachine
         /// <returns></returns>
         public static double SelectBetAmount(double playMoney) 
         {
-            double betAmount;
             Console.WriteLine("\nPlace a bet: ");
+            double betAmount = Convert.ToDouble(Console.ReadLine());
 
-            while(!Double.TryParse(Console.ReadLine() , out betAmount) || betAmount <= 0 || betAmount > playMoney)
+            while (betAmount <= 0 || betAmount > playMoney)
             {
                 Console.WriteLine($"Invalid bet. Please place a new bet equal or lower than {playMoney}: ");
                 betAmount = Convert.ToDouble(Console.ReadLine());
@@ -61,9 +61,10 @@ namespace slotMachine
         /// <returns></returns>
         public static int SelectLineToPlay() 
         {
-            int line;
             Console.WriteLine($"\nSelect line to play:\n 0 - horizontal\n 1 - vertical\n 2 - diagonal\n ");
-            while (!int.TryParse(Console.ReadLine(), out line) || line < 0 || line > 2)
+            int line = Convert.ToInt32(Console.ReadLine());
+
+            while (line < 0 || line > 2)
             {
                 Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the line variant.");
                 line = Convert.ToInt32(Console.ReadLine());
@@ -80,11 +81,11 @@ namespace slotMachine
         /// <returns></returns>
         public static int SelectStakeToPlay(List<int> list, List<double> wins, List<double> loses)
         {
-            int stakeIndex;
             Console.WriteLine($"For each play depending on the stake:\n{list[0]}cents win ${wins[0]} / lose {loses[0]}cents\n{list[1]}cents win ${wins[1]} / lose {loses[1]}cents\n{list[2]}cents win ${wins[2]} / lose {loses[2]}cents\n");
             Console.WriteLine($"\nSelect stake:\n 0 - {list[0]}cents\n 1 - {list[1]}cents\n 2 - {list[2]}cents\n ");
+            int stakeIndex = Convert.ToInt32(Console.ReadLine());
 
-            while (!int.TryParse(Console.ReadLine(), out stakeIndex) || stakeIndex < 0 || stakeIndex > 2)
+            while (stakeIndex < 0 || stakeIndex > 2)
             {
                 Console.WriteLine("Invalid input. Please enter 0, 1, or 2 for the stake.");
                 stakeIndex = Convert.ToInt32(Console.ReadLine());
@@ -140,9 +141,10 @@ namespace slotMachine
         }
         public static int AskIfKeepPlaying()
         {
-            int keepPlaying;
             Console.WriteLine("Do you want to play again?\nSelect: 1 - Yes\n 2 - No");
-            while(!int.TryParse(Console.ReadLine(), out keepPlaying) || keepPlaying < 1 || keepPlaying > 2)
+            int keepPlaying = Convert.ToInt32(Console.ReadLine());
+
+            while (keepPlaying < 1 || keepPlaying > 2)
             {
                 Console.WriteLine("Invalid input. Please select 1 or 2.");
                 keepPlaying = Convert.ToInt32(Console.ReadLine());
