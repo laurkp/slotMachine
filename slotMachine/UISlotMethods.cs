@@ -143,25 +143,20 @@ namespace slotMachine
             Console.WriteLine($"Bank: {bank}$");
         }
 
-        public static bool AskIfKeepPlaying(bool chooseToPlay)
+        public static int AskIfKeepPlaying()
         {
             int keepPlaying;
-            
             Console.WriteLine("Do you want to play again?\nSelect: 1 - Yes\n 2 - No");
             while(!int.TryParse(Console.ReadLine(), out keepPlaying) || keepPlaying < 1 || keepPlaying > 2)
             {
                 Console.WriteLine("Invalid input. Please select 1 or 2.");
                 keepPlaying = Convert.ToInt32(Console.ReadLine());
-                if (keepPlaying >= 1 && keepPlaying <= 2)
+                if (keepPlaying == 1 || keepPlaying == 2)
                 {
                     break;
                 }
             }
-            if(keepPlaying == 2)
-            {
-                chooseToPlay = false; 
-            }
-            return chooseToPlay;
+            return keepPlaying;
         }
     }
 }

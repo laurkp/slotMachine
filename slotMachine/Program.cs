@@ -5,7 +5,8 @@ namespace slotMachine
     internal class Program
     {
         public const double MIN_MONEY = 0.10;
-        public const double NO_FUNDS = 0; 
+        public const double NO_FUNDS = 0;
+        public const int CONDITION = 1;
         
         static void Main(string[] args)
         {
@@ -14,31 +15,31 @@ namespace slotMachine
             List<double> winList = new List<double> { 1, 2.5, 5 };
             List<double> loseList = new List<double> { 0.10, 0.25, 0.5 };
 
-            bool play = true;
-            while (play)
+            int play = CONDITION;
+            while (play == CONDITION)
             {
-                // Prompting welcome message
+                // Showing welcome message
                 UISlotMethods.Welcome();
 
-             
+                // Asking the user how much money wants to play
                 double moneyToPlay = UISlotMethods.SelectMoneyToPlay();
                 
-                while (true)
+                while (moneyToPlay != NO_FUNDS)
                 {
                     //Asking the user to place a bet
                     double betAmount = UISlotMethods.SelectBetAmount(moneyToPlay);
 
+                    // Using a variable to keep track of the betAmount taken from the moneyToPlay
                     double playBank = moneyToPlay - betAmount;
 
                     //Asking the user to select the line variant
-                    
                     int lineVar = UISlotMethods.SelectLineToPlay();
 
                     //Asking the user to select a stake
                     int stakeIdx = UISlotMethods.SelectStakeToPlay(stakeList, winList, loseList); ;
                     int userStake = stakeList[stakeIdx];
                     
-                    // Prompting the playing stake
+                    // Showing the playing stake
                     UISlotMethods.ShowUserStake(userStake);
 
                     // Declaring a 2D array
@@ -53,7 +54,7 @@ namespace slotMachine
                         // Assigning a random number to each slot
                         Logic.AssignDynamicSlotNumbers(slotMachine);
 
-                        // Prompting the slots with the random numbers
+                        // Showing the slots with the random numbers
                         UISlotMethods.ShowSlots(slotMachine);
 
                         // Using if statements to check if the user win or lose 
@@ -62,19 +63,17 @@ namespace slotMachine
                         // Calculating the winnings and loses
                         betAmount += Logic.CalcWinnings(winList, loseList, stakeIdx, isWin);
 
+                        // Updating how much money the user has left in the bank
                         moneyToPlay = playBank + betAmount;
                         
-                        // Prompting how much money the user has left for bet 
+                        // Showing how much money the user has left for bet 
                         UISlotMethods.ShowBetAmountLeft(betAmount);
-                        // Prompting how much money the user has left in the bank
+                        // Showing how much money the user has left in the bank
                         UISlotMethods.ShowBankAmountLeft(moneyToPlay);
                     }
-                    if(moneyToPlay == NO_FUNDS)
-                    {
-                        break;
-                    } 
                 }
-                UISlotMethods.AskIfKeepPlaying(play);
+                // Checking if the user wants to keep playing or not 
+                play = UISlotMethods.AskIfKeepPlaying();
             }
         }
     }
