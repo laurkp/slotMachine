@@ -56,12 +56,16 @@ namespace slotMachine
             bool win = false;
             if (line == 0) // horizontal line
             {
-                if (slot[0, 0] == slot[0, 1] && slot[0, 1] == slot[0, 2])
+                if ((slot[0, 0] == slot[0, 1] && slot[0, 1] == slot[0, 2]) ||
+                    (slot[1, 0] == slot[1, 1] && slot[1, 1] == slot[1, 2]) ||
+                    (slot[2, 0] == slot[2, 1] && slot[2, 1] == slot[2, 2]))
                     win = true;
             }
             if (line == 1) // vertical line
             {
-                if (slot[0, 0] == slot[1, 1] && slot[1, 1] == slot[2, 0])
+                if ((slot[0, 0] == slot[1, 0] && slot[1, 0] == slot[2, 0]) ||
+                    (slot[0, 1] == slot[1, 1] && slot[1, 1] == slot[2, 1]) ||
+                    (slot[0, 2] == slot[1, 2] && slot[1, 2] == slot[2, 2]))
                     win = true;
             }
             if (line == 2) // diagonal line
