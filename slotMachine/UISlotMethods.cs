@@ -121,7 +121,30 @@ namespace slotMachine
         /// <returns></returns>
         public static void ShowSlots(int[,] slots)
         {
-            Console.WriteLine($"\n{slots[0, 0]} | {slots[0, 1]} | {slots[0, 2]}\n-- --  --\n{slots[1, 0]} | {slots[1, 1]} | {slots[1, 2]}\n-- --  --\n{slots[2, 0]} | {slots[2, 1]} | {slots[2, 2]}\n");        
+            int rows = slots.GetLength(0);
+            int columns = slots.GetLength(1);
+
+            string output = "";
+
+            for (int row = 0; row < rows; row++)
+            {
+                for (int column = 0; column < columns; column++)
+                {
+                    output += $"{slots[row, column]}";
+
+                    if (column < columns - 1)
+                    {
+                        output += " | ";
+                    }
+                }
+
+                if (row < rows - 1)
+                {
+                    output += $"\n{new string('-',columns * Logic.NUMBER_OF_SLOTS)}\n";
+                }
+            }
+
+            Console.WriteLine(output);
         }
         /// <summary>
         /// Prompting the bet amount
