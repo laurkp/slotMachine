@@ -9,6 +9,8 @@ namespace slotMachine
 
         // Declaring a constant for the number of slots in each row and colum
         public const int NUMBER_OF_SLOTS = 3;
+        public const int MIN_NUMBER = 1;
+        public const int MAX_NUMBER = 9+1;
 
         /// <summary>
         /// Calculating winnings and loses
@@ -41,7 +43,7 @@ namespace slotMachine
             {
                 for (int c = 0; c < NUMBER_OF_SLOTS; c++)
                 {
-                    slot[r, c] = random.Next(1, 10);
+                    slot[r, c] = random.Next(MIN_NUMBER, MAX_NUMBER);
                 }
             }
         }
