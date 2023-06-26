@@ -4,6 +4,8 @@ namespace slotMachine
 {
     internal class UISlotMethods
     {
+        public const int USER_CHOICE_YES = 1;
+        public const int USER_CHOICE_NO = 2;    
         /// <summary>
         /// Welcoming message
         /// </summary>
@@ -139,21 +141,18 @@ namespace slotMachine
         {
             Console.WriteLine($"Bank: {bank}$");
         }
-        public static int AskIfKeepPlaying()
+        public static bool AskIfKeepPlaying()
         {
             Console.WriteLine("Do you want to play again?\nSelect: 1 - Yes\n 2 - No");
             int keepPlaying = Convert.ToInt32(Console.ReadLine());
 
-            while (keepPlaying < 1 || keepPlaying > 2)
+            while (keepPlaying != USER_CHOICE_YES && keepPlaying != USER_CHOICE_NO)
             {
                 Console.WriteLine("Invalid input. Please select 1 or 2.");
                 keepPlaying = Convert.ToInt32(Console.ReadLine());
-                if (keepPlaying == 1 || keepPlaying == 2)
-                {
-                    break;
-                }
             }
-            return keepPlaying;
+
+            return  keepPlaying == USER_CHOICE_YES;
         }
     }
 }

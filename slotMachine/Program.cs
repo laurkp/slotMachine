@@ -14,8 +14,8 @@ namespace slotMachine
             List<double> winList = new List<double> { 1, 2.5, 5 };
             List<double> loseList = new List<double> { 0.10, 0.25, 0.5 };
 
-            int play = CONDITION;
-            while (play == CONDITION)
+            bool play = true;
+            while (play)
             {
                 // Showing welcome message
                 UISlotMethods.Welcome();
