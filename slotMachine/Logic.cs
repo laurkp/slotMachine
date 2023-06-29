@@ -10,7 +10,10 @@ namespace slotMachine
         // Declaring a constant for the number of slots in each row and colum
         public const int NUMBER_OF_SLOTS = 3;
         public const int MIN_NUMBER = 1;
-        public const int MAX_NUMBER = 9+1;
+        public const int MAX_NUMBER = 10;
+        public const int INPUT_HORIZONTAL_LINE = 0;
+        public const int INPUT_VERTICAL_LINE = 1;
+        public const int INPUT_DIAGONAL_LINE = 2;
 
         /// <summary>
         /// Calculating winnings and loses
@@ -56,21 +59,21 @@ namespace slotMachine
         public static bool CheckIfWinOrLose(int[,] slot, int line)
         {
             bool win = false;
-            if (line == 0) // horizontal line
+            if (line == INPUT_HORIZONTAL_LINE) // horizontal line
             {
                 if ((slot[0, 0] == slot[0, 1] && slot[0, 1] == slot[0, 2]) ||
                     (slot[1, 0] == slot[1, 1] && slot[1, 1] == slot[1, 2]) ||
                     (slot[2, 0] == slot[2, 1] && slot[2, 1] == slot[2, 2]))
                     win = true;
             }
-            if (line == 1) // vertical line
+            if (line == INPUT_VERTICAL_LINE) // vertical line
             {
                 if ((slot[0, 0] == slot[1, 0] && slot[1, 0] == slot[2, 0]) ||
                     (slot[0, 1] == slot[1, 1] && slot[1, 1] == slot[2, 1]) ||
                     (slot[0, 2] == slot[1, 2] && slot[1, 2] == slot[2, 2]))
                     win = true;
             }
-            if (line == 2) // diagonal line
+            if (line == INPUT_DIAGONAL_LINE) // diagonal line
             {
                 if ((slot[0, 0] == slot[1, 1] && slot[2, 2] == slot[1, 1]) ||
                     (slot[0, 2] == slot[1, 1] && slot[2, 0] == slot[1, 1]))
