@@ -4,6 +4,7 @@ namespace slotMachine
 {
     internal class UISlotMethods
     {
+        public const int LOWER_LIMIT = 0;
         public const int USER_CHOICE_YES = 1;
         public const int USER_CHOICE_NO = 2;    
         /// <summary>
@@ -23,10 +24,10 @@ namespace slotMachine
             Console.WriteLine("Insert the amount of money you want to play: ");
             double amount = -1;
 
-            while (amount <= Logic.INPUT_HORIZONTAL_LINE)
+            while (amount <= LOWER_LIMIT)
             {
                 amount = Convert.ToDouble(Console.ReadLine());
-                if (amount <= Logic.INPUT_HORIZONTAL_LINE)
+                if (amount <= LOWER_LIMIT)
                 {
                     Console.WriteLine("Invalid input. Please enter a valid positive amount");
                 }     
@@ -44,15 +45,15 @@ namespace slotMachine
             Console.WriteLine("\nPlace a bet: ");
             double betAmount = -1;
 
-            while (betAmount <= Logic.INPUT_HORIZONTAL_LINE || betAmount > playMoney)
+            while (betAmount <= LOWER_LIMIT || betAmount > playMoney)
             {
                 betAmount = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine($"Invalid bet. Please place a new bet equal or lower than {playMoney}: ");
                 
-                if (betAmount > Logic.INPUT_HORIZONTAL_LINE && betAmount <= playMoney)
+                if (betAmount > LOWER_LIMIT && betAmount <= playMoney)
                 {
                     break;
                 }
+                Console.WriteLine($"Invalid bet. Please place a new bet equal or lower than {playMoney}: ");
             }
             return betAmount;
         }
@@ -69,11 +70,12 @@ namespace slotMachine
             while (line < Logic.INPUT_HORIZONTAL_LINE || line > Logic.INPUT_DIAGONAL_LINE)
             {
                 line = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine($"Invalid input. Please enter {Logic.INPUT_HORIZONTAL_LINE}, {Logic.INPUT_VERTICAL_LINE}, or {Logic.INPUT_DIAGONAL_LINE} for the line variant.");
+                
                 if (line >= Logic.INPUT_HORIZONTAL_LINE && line <= Logic.INPUT_DIAGONAL_LINE)
                 {
                     break;
                 }
+                Console.WriteLine($"Invalid input. Please enter {Logic.INPUT_HORIZONTAL_LINE}, {Logic.INPUT_VERTICAL_LINE}, or {Logic.INPUT_DIAGONAL_LINE} for the line variant.");
             }
             return line;
         }
@@ -81,20 +83,31 @@ namespace slotMachine
         /// Asking the user to select a stake
         /// </summary>
         /// <returns></returns>
-        public static int SelectStakeToPlay(List<int> list, List<double> wins, List<double> loses)
+        public static int SelectStakeToPlay(List<int> stakeList, List<double> wins, List<double> loses)
         {
-            Console.WriteLine($"For each play depending on the stake:\n{list[0]}cents win ${wins[0]} / lose {loses[0]}cents\n{list[1]}cents win ${wins[1]} / lose {loses[1]}cents\n{list[2]}cents win ${wins[2]} / lose {loses[2]}cents\n");
-            Console.WriteLine($"\nSelect stake:\n 0 - {list[0]}cents\n 1 - {list[1]}cents\n 2 - {list[2]}cents\n ");
+            string winsLoses = "";
+            string selectStake = "";
+
+            for (int i = 0; i < stakeList.Count; i++)
+            {
+                winsLoses += $"\n{stakeList[i]}cents wins ${wins[i]} / lose {loses[i]}cents\n";
+                selectStake += $"\n{i} - {stakeList[i]}cents\n";
+            }
+
+            Console.WriteLine($"For each play depending on the stake: \n{winsLoses}");
+            Console.WriteLine($"Select stake: \n{selectStake}");
+
             int stakeIndex = -1;
 
-            while (stakeIndex < Logic.INPUT_HORIZONTAL_LINE || stakeIndex > Logic.INPUT_DIAGONAL_LINE)
+            while (stakeIndex < LOWER_LIMIT || stakeIndex > stakeList.Count)
             {
                 stakeIndex = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine($"Invalid input. Please enter a number between {Logic.INPUT_HORIZONTAL_LINE} and {list.Count - Logic.INPUT_VERTICAL_LINE}.");
+                
                 if (stakeIndex >= Logic.INPUT_HORIZONTAL_LINE && stakeIndex <= Logic.INPUT_DIAGONAL_LINE)
                 {
                     break;
                 }
+                Console.WriteLine($"Invalid input. Please enter a number between {Logic.INPUT_HORIZONTAL_LINE} and {stakeList.Count}.\n");
             }
             return stakeIndex;
         }
@@ -143,7 +156,6 @@ namespace slotMachine
                     output += $"\n{new string('-',slotColumns * Logic.NUMBER_OF_SLOTS)}\n";
                 }
             }
-
             Console.WriteLine(output);
         }
         /// <summary>
@@ -174,7 +186,6 @@ namespace slotMachine
                 keepPlaying = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Invalid input. Please select 1 or 2.");
             }
-
             return  keepPlaying == USER_CHOICE_YES;
         }
     }

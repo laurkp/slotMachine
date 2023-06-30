@@ -11,9 +11,9 @@ namespace slotMachine
         public const int NUMBER_OF_SLOTS = 3;
         public const int MIN_NUMBER = 1;
         public const int MAX_NUMBER = 10;
-        public const int INPUT_HORIZONTAL_LINE = 0;
-        public const int INPUT_VERTICAL_LINE = 1;
-        public const int INPUT_DIAGONAL_LINE = 2;
+        public const int INPUT_HORIZONTAL_LINE = 1;
+        public const int INPUT_VERTICAL_LINE = 2;
+        public const int INPUT_DIAGONAL_LINE = 3;
 
         /// <summary>
         /// Calculating winnings and loses
