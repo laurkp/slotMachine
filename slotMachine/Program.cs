@@ -28,8 +28,8 @@ namespace slotMachine
                     //Asking the user to place a bet
                     double betAmount = UISlotMethods.SelectBetAmount(moneyToPlay);
 
-                    // Using a variable to keep track of the betAmount taken from the moneyToPlay
-                    double playBank = moneyToPlay - betAmount;
+                    // Keeping track of the betAmount taken from the moneyToPlay
+                    moneyToPlay = moneyToPlay - betAmount;
 
                     //Asking the user to select the line variant
                     int lineVar = UISlotMethods.SelectLineToPlay();
@@ -59,10 +59,10 @@ namespace slotMachine
                         bool isWin = Logic.CheckIfWinOrLose(slotMachine, lineVar);
 
                         // Calculating the winnings and loses
-                        betAmount += Logic.CalcWinnings(winList, loseList, stakeIdx, isWin);
+                        double winLosAmount = Logic.CalcWinnings(winList, loseList, stakeIdx, isWin);
 
                         // Updating how much money the user has left in the bank
-                        moneyToPlay = playBank + betAmount;
+                        moneyToPlay += winLosAmount;
                         
                         // Showing how much money the user has left for bet 
                         UISlotMethods.ShowBetAmountLeft(betAmount);
