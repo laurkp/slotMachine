@@ -50,7 +50,7 @@ namespace slotMachine
                     while (Console.ReadKey().Key == ConsoleKey.Enter && betAmount >= MIN_MONEY)
                     {
                         // Assigning a random number to each slot
-                        Logic.AssignDynamicSlotNumbers(slotMachine);
+                        slotMachine = Logic.AssignDynamicSlotNumbers();
 
                         // Showing the slots with the random numbers
                         UISlotMethods.ShowSlots(slotMachine);

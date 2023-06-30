@@ -26,22 +26,24 @@ namespace slotMachine
         /// <returns></returns>
         public static double CalcWinnings(List<double> winningAmount, List<double> losingAmount, int index, bool userWon)
         {
-            
+
             if (userWon)
             {
-               return winningAmount[index];
+                return winningAmount[index];
             }
             else
             {
-               return losingAmount[index]*-1;
+                return losingAmount[index] * -1;
             }
         }
         /// <summary>
         /// Assigning random numbers to the slots
         /// </summary>
         /// <param name="slot"></param>
-        public static void AssignDynamicSlotNumbers(int[,] slot)
+        public static int[,] AssignDynamicSlotNumbers()
         {
+            int[,] slot = new int[NUMBER_OF_SLOTS, NUMBER_OF_SLOTS]; 
+
             for (int r = 0; r < NUMBER_OF_SLOTS; r++)
             {
                 for (int c = 0; c < NUMBER_OF_SLOTS; c++)
@@ -49,6 +51,7 @@ namespace slotMachine
                     slot[r, c] = random.Next(MIN_NUMBER, MAX_NUMBER);
                 }
             }
+            return slot;
         }
         /// <summary>
         /// Checking if the line win or lose

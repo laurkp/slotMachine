@@ -102,11 +102,11 @@ namespace slotMachine
             while (stakeIndex < LOWER_LIMIT || stakeIndex > stakeList.Count)
             {
                 stakeIndex = Convert.ToInt32(Console.ReadLine());
-                
-                //if (stakeIndex >= Logic.INPUT_HORIZONTAL_LINE && stakeIndex <= Logic.INPUT_DIAGONAL_LINE)
-                //{
-                //    break;
-                //}
+
+                if (stakeIndex >= Logic.INPUT_HORIZONTAL_LINE && stakeIndex <= Logic.INPUT_DIAGONAL_LINE)
+                {
+                    break;
+                }
                 Console.WriteLine($"Invalid input. Please enter a number between {LOWER_LIMIT} and {stakeList.Count - USER_CHOICE_YES} inclusive.\n");
             }
             return stakeIndex;
