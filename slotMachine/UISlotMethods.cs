@@ -48,7 +48,7 @@ namespace slotMachine
             while (betAmount <= LOWER_LIMIT || betAmount > playMoney)
             {
                 betAmount = Convert.ToDouble(Console.ReadLine());
-                
+
                 if (betAmount > LOWER_LIMIT && betAmount <= playMoney)
                 {
                     break;
@@ -70,7 +70,7 @@ namespace slotMachine
             while (line < Logic.INPUT_HORIZONTAL_LINE || line > Logic.INPUT_DIAGONAL_LINE)
             {
                 line = Convert.ToInt32(Console.ReadLine());
-                
+
                 if (line >= Logic.INPUT_HORIZONTAL_LINE && line <= Logic.INPUT_DIAGONAL_LINE)
                 {
                     break;
@@ -103,11 +103,11 @@ namespace slotMachine
             {
                 stakeIndex = Convert.ToInt32(Console.ReadLine());
                 
-                if (stakeIndex >= Logic.INPUT_HORIZONTAL_LINE && stakeIndex <= Logic.INPUT_DIAGONAL_LINE)
-                {
-                    break;
-                }
-                Console.WriteLine($"Invalid input. Please enter a number between {Logic.INPUT_HORIZONTAL_LINE} and {stakeList.Count}.\n");
+                //if (stakeIndex >= Logic.INPUT_HORIZONTAL_LINE && stakeIndex <= Logic.INPUT_DIAGONAL_LINE)
+                //{
+                //    break;
+                //}
+                Console.WriteLine($"Invalid input. Please enter a number between {LOWER_LIMIT} and {stakeList.Count - USER_CHOICE_YES} inclusive.\n");
             }
             return stakeIndex;
         }
