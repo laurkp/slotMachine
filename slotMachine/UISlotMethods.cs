@@ -47,6 +47,7 @@ namespace slotMachine
 
             while (betAmount <= LOWER_LIMIT || betAmount > playMoney)
             {
+                
                 betAmount = Convert.ToDouble(Console.ReadLine());
 
                 if (betAmount > LOWER_LIMIT && betAmount <= playMoney)
@@ -67,15 +68,14 @@ namespace slotMachine
             Console.WriteLine($"\nSelect line to play:\n {Logic.INPUT_HORIZONTAL_LINE} - horizontal\n {Logic.INPUT_VERTICAL_LINE} - vertical\n {Logic.INPUT_DIAGONAL_LINE} - diagonal\n ");
             int line = -1;
 
-            while (line < Logic.INPUT_HORIZONTAL_LINE || line > Logic.INPUT_DIAGONAL_LINE)
-            {
-                line = Convert.ToInt32(Console.ReadLine());
+            bool validInput = false;
+            line = Convert.ToInt32(Console.ReadLine());
 
-                if (line >= Logic.INPUT_HORIZONTAL_LINE && line <= Logic.INPUT_DIAGONAL_LINE)
-                {
-                    break;
-                }
-                Console.WriteLine($"Invalid input. Please enter {Logic.INPUT_HORIZONTAL_LINE}, {Logic.INPUT_VERTICAL_LINE}, or {Logic.INPUT_DIAGONAL_LINE} for the line variant.");
+            validInput = line < Logic.INPUT_HORIZONTAL_LINE || line > Logic.INPUT_DIAGONAL_LINE;
+
+            if (!validInput)
+            {
+                  Console.WriteLine($"Invalid input. Please enter {Logic.INPUT_HORIZONTAL_LINE}, {Logic.INPUT_VERTICAL_LINE}, or {Logic.INPUT_DIAGONAL_LINE} for the line variant.");
             }
             return line;
         }

@@ -28,9 +28,6 @@ namespace slotMachine
                     //Asking the user to place a bet
                     double betAmount = UISlotMethods.SelectBetAmount(moneyToPlay);
 
-                    // Keeping track of the betAmount taken from the moneyToPlay
-                    moneyToPlay = moneyToPlay - betAmount;
-
                     //Asking the user to select the line variant
                     int lineVar = UISlotMethods.SelectLineToPlay();
 
@@ -63,6 +60,7 @@ namespace slotMachine
 
                         // Updating how much money the user has left in the bank
                         moneyToPlay += winLosAmount;
+                        betAmount += winLosAmount;
                         
                         // Showing how much money the user has left for bet 
                         UISlotMethods.ShowBetAmountLeft(betAmount);
