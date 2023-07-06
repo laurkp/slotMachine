@@ -68,14 +68,15 @@ namespace slotMachine
             Console.WriteLine($"\nSelect line to play:\n {Logic.INPUT_HORIZONTAL_LINE} - horizontal\n {Logic.INPUT_VERTICAL_LINE} - vertical\n {Logic.INPUT_DIAGONAL_LINE} - diagonal\n ");
             int line = -1;
 
-            bool validInput = false;
-            line = Convert.ToInt32(Console.ReadLine());
-
-            validInput = line < Logic.INPUT_HORIZONTAL_LINE || line > Logic.INPUT_DIAGONAL_LINE;
-
-            if (!validInput)
+            while (line < Logic.INPUT_HORIZONTAL_LINE || line > Logic.INPUT_DIAGONAL_LINE)
             {
-                  Console.WriteLine($"Invalid input. Please enter {Logic.INPUT_HORIZONTAL_LINE}, {Logic.INPUT_VERTICAL_LINE}, or {Logic.INPUT_DIAGONAL_LINE} for the line variant.");
+                line = Convert.ToInt32(Console.ReadLine());
+
+                if (line >= Logic.INPUT_HORIZONTAL_LINE && line <= Logic.INPUT_DIAGONAL_LINE)
+                {
+                    break;
+                }
+                Console.WriteLine($"Invalid input. Please enter {Logic.INPUT_HORIZONTAL_LINE}, {Logic.INPUT_VERTICAL_LINE}, or {Logic.INPUT_DIAGONAL_LINE} for the line variant.");
             }
             return line;
         }
