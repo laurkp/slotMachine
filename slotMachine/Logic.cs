@@ -1,5 +1,8 @@
 ﻿
 
+using System.Diagnostics.SymbolStore;
+using System.Drawing;
+
 namespace slotMachine
 {
     internal class Logic
@@ -59,29 +62,98 @@ namespace slotMachine
         /// <param name="slot"></param>
         /// <param name="line"></param>
         /// <returns></returns>
-        public static bool CheckIfWinOrLose(int[,] slot, int line)
+        public static bool CheckIfWinOrLose(int[,] slot, int lineType)
         {
+            int slotSize = slot.GetLength(0);
             bool win = false;
-            if (line == INPUT_HORIZONTAL_LINE) // horizontal line
+
+            if (lineType == INPUT_HORIZONTAL_LINE) // horizontal line
             {
-                if ((slot[0, 0] == slot[0, 1] && slot[0, 1] == slot[0, 2]) ||
-                    (slot[1, 0] == slot[1, 1] && slot[1, 1] == slot[1, 2]) ||
-                    (slot[2, 0] == slot[2, 1] && slot[2, 1] == slot[2, 2]))
-                    win = true;
+                for (int r = 0; r < slotSize; r++)
+                {
+                    bool isWinningLine = true;
+                    int firstElement = slot[r, 0];
+
+                    for (int c = 1; c < slotSize; c++)
+                    {
+                        if (slot[r, c] != firstElement)
+                        {
+                            isWinningLine = false;
+                            break;
+                        }
+                    }
+
+                    if (isWinningLine)
+                    {
+                        win = true;
+                        break;
+                    }
+                }
             }
-            if (line == INPUT_VERTICAL_LINE) // vertical line
+            else if (lineType == INPUT_VERTICAL_LINE) // vertical line
             {
-                if ((slot[0, 0] == slot[1, 0] && slot[1, 0] == slot[2, 0]) ||
-                    (slot[0, 1] == slot[1, 1] && slot[1, 1] == slot[2, 1]) ||
-                    (slot[0, 2] == slot[1, 2] && slot[1, 2] == slot[2, 2]))
-                    win = true;
+                for (int c = 0; c < slotSize; c++)
+                {
+                    bool isWinningLine = true;
+                    int firstElement = slot[0, c];
+
+                    for (int r = 1; r < slotSize; r++)
+                    {
+                        if (slot[r, c] != firstElement)
+                        {
+                            isWinningLine = false;
+                            break;
+                        }
+                    }
+
+                    if (isWinningLine)
+                    {
+                        win = true;
+                        break;
+                    }
+                }
             }
-            if (line == INPUT_DIAGONAL_LINE) // diagonal line
+            else if (lineType== INPUT_DIAGONAL_LINE) // diagonal line
             {
-                if ((slot[0, 0] == slot[1, 1] && slot[2, 2] == slot[1, 1]) ||
-                    (slot[0, 2] == slot[1, 1] && slot[2, 0] == slot[1, 1]))
+                // Check top-left to bottom-right diagonal
+                bool isWinningLine = true;
+                int firstElement = slot[0, 0];
+
+                for (int i = 1; i < slotSize; i++)
+                {
+                    if (slot[i, i] != firstElement)
+                    {
+                        isWinningLine = false;
+                        break;
+                    }
+                }
+
+                if (isWinningLine)
+                {
                     win = true;
+                }
+                else
+                {
+                    // Check top-right to bottom-left diagonal
+                    isWinningLine = true;
+                    firstElement = slot[0, slotSize - 1];
+
+                    for (int i = 1; i < slotSize; i++)
+                    {
+                        if (slot[i, slotSize - 1 - i] != firstElement)
+                        {
+                            isWinningLine = false;
+                            break;
+                        }
+                    }
+
+                    if (isWinningLine)
+                    {
+                        win = true;
+                    }
+                }
             }
+
             return win;
         }
     }

@@ -24,13 +24,14 @@ namespace slotMachine
             Console.WriteLine("Insert the amount of money you want to play: ");
             double amount = -1;
 
-            while (amount <= LOWER_LIMIT)
+            while (true)
             {
                 amount = Convert.ToDouble(Console.ReadLine());
-                if (amount <= LOWER_LIMIT)
+                if (amount > LOWER_LIMIT)
                 {
-                    Console.WriteLine("Invalid input. Please enter a valid positive amount");
-                }     
+                    break;
+                }
+                Console.WriteLine("Invalid input. Please enter a valid positive amount");
             }
             Console.WriteLine($"Intial money: {amount}");
             return amount;
@@ -45,9 +46,8 @@ namespace slotMachine
             Console.WriteLine("\nPlace a bet: ");
             double betAmount = -1;
 
-            while (betAmount <= LOWER_LIMIT || betAmount > playMoney)
+            while (true)
             {
-                
                 betAmount = Convert.ToDouble(Console.ReadLine());
 
                 if (betAmount > LOWER_LIMIT && betAmount <= playMoney)
@@ -68,7 +68,7 @@ namespace slotMachine
             Console.WriteLine($"\nSelect line to play:\n {Logic.INPUT_HORIZONTAL_LINE} - horizontal\n {Logic.INPUT_VERTICAL_LINE} - vertical\n {Logic.INPUT_DIAGONAL_LINE} - diagonal\n ");
             int line = -1;
 
-            while (line < Logic.INPUT_HORIZONTAL_LINE || line > Logic.INPUT_DIAGONAL_LINE)
+            while (true)
             {
                 line = Convert.ToInt32(Console.ReadLine());
 
@@ -100,7 +100,7 @@ namespace slotMachine
 
             int stakeIndex = -1;
 
-            while (stakeIndex < LOWER_LIMIT || stakeIndex > stakeList.Count)
+            while (true)
             {
                 stakeIndex = Convert.ToInt32(Console.ReadLine());
 
