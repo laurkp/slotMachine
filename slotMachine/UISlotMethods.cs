@@ -166,7 +166,7 @@ namespace slotMachine
         /// <returns></returns>
         public static void ShowBetAmountLeft(double bet)
         {
-            Console.WriteLine($"Bet: {bet}$");
+            Console.WriteLine($"\nBet: {bet}$");
         }
         /// <summary>
         /// Prompting how much money are left during the game
@@ -175,11 +175,11 @@ namespace slotMachine
         /// <returns></returns>
         public static void ShowBankAmountLeft(double bank)
         {
-            Console.WriteLine($"Bank: {bank}$");
+            Console.WriteLine($"\nBank: {bank}$");
         }
         public static bool AskIfKeepPlaying()
         {
-            Console.WriteLine($"Do you want to play again?\nSelect: {USER_CHOICE_YES} - Yes\n {USER_CHOICE_NO} - No");
+            Console.WriteLine($"\nDo you want to play again?\nSelect: {USER_CHOICE_YES} - Yes\n {USER_CHOICE_NO} - No");
             int keepPlaying = -1;
 
             while (keepPlaying != USER_CHOICE_YES && keepPlaying != USER_CHOICE_NO)

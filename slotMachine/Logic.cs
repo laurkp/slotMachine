@@ -1,5 +1,6 @@
 ﻿
 
+using System.Diagnostics;
 using System.Diagnostics.SymbolStore;
 using System.Drawing;
 
@@ -64,17 +65,18 @@ namespace slotMachine
         /// <returns></returns>
         public static bool CheckIfWinOrLose(int[,] slot, int lineType)
         {
-            int slotSize = slot.GetLength(0);
+            int rowCount = slot.GetLength(0);
+            int columnCount = slot.GetLength(1);
             bool win = false;
 
             if (lineType == INPUT_HORIZONTAL_LINE) // horizontal line
             {
-                for (int r = 0; r < slotSize; r++)
+                for (int r = 0; r < rowCount; r++)
                 {
                     bool isWinningLine = true;
                     int firstElement = slot[r, 0];
 
-                    for (int c = 1; c < slotSize; c++)
+                    for (int c = 0; c < columnCount; c++)
                     {
                         if (slot[r, c] != firstElement)
                         {
@@ -92,12 +94,12 @@ namespace slotMachine
             }
             else if (lineType == INPUT_VERTICAL_LINE) // vertical line
             {
-                for (int c = 0; c < slotSize; c++)
+                for (int c = 0; c < columnCount; c++)
                 {
                     bool isWinningLine = true;
                     int firstElement = slot[0, c];
 
-                    for (int r = 1; r < slotSize; r++)
+                    for (int r = 0; r < rowCount; r++)
                     {
                         if (slot[r, c] != firstElement)
                         {
@@ -119,7 +121,7 @@ namespace slotMachine
                 bool isWinningLine = true;
                 int firstElement = slot[0, 0];
 
-                for (int i = 1; i < slotSize; i++)
+                for (int i = 0; i < columnCount; i++)
                 {
                     if (slot[i, i] != firstElement)
                     {
@@ -136,11 +138,11 @@ namespace slotMachine
                 {
                     // Check top-right to bottom-left diagonal
                     isWinningLine = true;
-                    firstElement = slot[0, slotSize - 1];
+                    firstElement = slot[0, columnCount - 1];
 
-                    for (int i = 1; i < slotSize; i++)
+                    for (int i = 0; i < rowCount; i++)
                     {
-                        if (slot[i, slotSize - 1 - i] != firstElement)
+                        if (slot[i, rowCount - 1 - i] != firstElement)
                         {
                             isWinningLine = false;
                             break;
