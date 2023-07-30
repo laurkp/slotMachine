@@ -65,65 +65,35 @@ namespace slotMachine
         /// <returns></returns>
         public static bool CheckIfWinOrLose(int[,] slot, int lineType)
         {
+            switch (lineType)
+            {
+                case INPUT_HORIZONTAL_LINE:
+                    return CheckHorizontalWin(slot);
+
+                case INPUT_VERTICAL_LINE:
+                    return CheckVerticalWin(slot);
+
+                case INPUT_DIAGONAL_LINE:
+                    return CheckDiagonalWin(slot);
+
+                default:
+                    return false; // Invalid lineType, return false.
+            }
+        }
+
+        private static bool CheckHorizontalWin(int[,] slot)
+        {
             int rowCount = slot.GetLength(0);
             int columnCount = slot.GetLength(1);
-            bool win = false;
 
-            if (lineType == INPUT_HORIZONTAL_LINE) // horizontal line
+            for (int r = 0; r < rowCount; r++)
             {
-                for (int r = 0; r < rowCount; r++)
-                {
-                    bool isWinningLine = true;
-                    int firstElement = slot[r, 0];
+                int firstElement = slot[r, 0];
+                bool isWinningLine = true;
 
-                    for (int c = 0; c < columnCount; c++)
-                    {
-                        if (slot[r, c] != firstElement)
-                        {
-                            isWinningLine = false;
-                            break;
-                        }
-                    }
-
-                    if (isWinningLine)
-                    {
-                        win = true;
-                        break;
-                    }
-                }
-            }
-            else if (lineType == INPUT_VERTICAL_LINE) // vertical line
-            {
                 for (int c = 0; c < columnCount; c++)
                 {
-                    bool isWinningLine = true;
-                    int firstElement = slot[0, c];
-
-                    for (int r = 0; r < rowCount; r++)
-                    {
-                        if (slot[r, c] != firstElement)
-                        {
-                            isWinningLine = false;
-                            break;
-                        }
-                    }
-
-                    if (isWinningLine)
-                    {
-                        win = true;
-                        break;
-                    }
-                }
-            }
-            else if (lineType== INPUT_DIAGONAL_LINE) // diagonal line
-            {
-                // Check top-left to bottom-right diagonal
-                bool isWinningLine = true;
-                int firstElement = slot[0, 0];
-
-                for (int i = 0; i < columnCount; i++)
-                {
-                    if (slot[i, i] != firstElement)
+                    if (slot[r, c] != firstElement)
                     {
                         isWinningLine = false;
                         break;
@@ -132,31 +102,81 @@ namespace slotMachine
 
                 if (isWinningLine)
                 {
-                    win = true;
-                }
-                else
-                {
-                    // Check top-right to bottom-left diagonal
-                    isWinningLine = true;
-                    firstElement = slot[0, columnCount - 1];
-
-                    for (int i = 0; i < columnCount; i++)
-                    {
-                        if (slot[i, columnCount - 1 - i] != firstElement)
-                        {
-                            isWinningLine = false;
-                            break;
-                        }
-                    }
-
-                    if (isWinningLine)
-                    {
-                        win = true;
-                    }
+                    return true;
                 }
             }
 
-            return win;
+            return false;
         }
+
+        private static bool CheckVerticalWin(int[,] slot)
+        {
+            int rowCount = slot.GetLength(0);
+            int columnCount = slot.GetLength(1);
+
+            for (int c = 0; c < columnCount; c++)
+            {
+                int firstElement = slot[0, c];
+                bool isWinningLine = true;
+
+                for (int r = 0; r < rowCount; r++)
+                {
+                    if (slot[r, c] != firstElement)
+                    {
+                        isWinningLine = false;
+                        break;
+                    }
+                }
+
+                if (isWinningLine)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool CheckDiagonalWin(int[,] slot)
+        {
+            int rowCount = slot.GetLength(0);
+            int columnCount = slot.GetLength(1);
+
+            // Check top-left to bottom-right diagonal
+            int firstElement = slot[0, 0];
+            bool isWinningLine = true;
+
+            for (int i = 0; i < columnCount; i++)
+            {
+                if (slot[i, i] != firstElement)
+                {
+                    isWinningLine = false;
+                    break;
+                }
+            }
+
+            if (isWinningLine)
+            {
+                return true;
+            }
+            else
+            {
+                // Check top-right to bottom-left diagonal
+                firstElement = slot[0, columnCount - 1];
+                isWinningLine = true;
+
+                for (int i = 0; i < columnCount; i++)
+                {
+                    if (slot[i, columnCount - 1 - i] != firstElement)
+                    {
+                        isWinningLine = false;
+                        break;
+                    }
+                }
+
+                return isWinningLine;
+            }
+        }
+
     }
 }

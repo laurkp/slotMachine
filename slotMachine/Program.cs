@@ -52,7 +52,7 @@ namespace slotMachine
                         // Showing the slots with the random numbers
                         UISlotMethods.ShowSlots(slotMachine);
 
-                        // Using if statements to check if the user win or lose 
+                        // Check if the user win or lose 
                         bool isWin = Logic.CheckIfWinOrLose(slotMachine, lineVar);
 
                         // Calculating the winnings and loses
