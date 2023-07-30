@@ -140,9 +140,9 @@ namespace slotMachine
                     isWinningLine = true;
                     firstElement = slot[0, columnCount - 1];
 
-                    for (int i = 0; i < rowCount; i++)
+                    for (int i = 0; i < columnCount; i++)
                     {
-                        if (slot[i, rowCount - 1 - i] != firstElement)
+                        if (slot[i, columnCount - 1 - i] != firstElement)
                         {
                             isWinningLine = false;
                             break;
