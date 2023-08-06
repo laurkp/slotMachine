@@ -139,7 +139,7 @@ namespace slotMachine
 
         private static bool CheckDiagonalWin(int[,] slot)
         {
-            int rowCount = slot.GetLength(0);
+            
             int columnCount = slot.GetLength(1);
 
             // Check top-left to bottom-right diagonal
@@ -159,8 +159,7 @@ namespace slotMachine
             {
                 return true;
             }
-            else
-            {
+  
                 // Check top-right to bottom-left diagonal
                 firstElement = slot[0, columnCount - 1];
                 isWinningLine = true;
@@ -175,7 +174,6 @@ namespace slotMachine
                 }
 
                 return isWinningLine;
-            }
         }
 
     }
