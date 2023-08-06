@@ -37,7 +37,7 @@ namespace slotMachine
             }
             else
             {
-                return losingAmount[index] * -1;
+                return losingAmount[index];
             }
         }
         /// <summary>
